@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DarkroomJS</title>
+  <link rel="stylesheet" href="./build/darkroom.css">
+</head>
+<body>
+<p>First text.</p>
+<p>
+  <!-- you need to make ids for the images programmatically-->
+  <img src="./img/4.jpg" title="le tools" id="target1" class="tools"><br>
+  <img src="./img/1.jpg" title="le tools" id="target2" class="tools"><br>
+  <img src="./img/2.jpg" title="le tools" id="target3" class="tools"><br>
+  <img src="./img/3.jpg" title="le tools" id="target4" class="tools"><br>
+</p>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="./vendor/fabric.js"></script>
+  <script src="./build/darkroom.js"></script>
+  <script>
+  $(document).ready(function() {  
+    $('.tools').hover(function(){
+      var thisId = $(this).attr('id');
+      var selectorToPaste = "#" + thisId;
+      var dkrm = new Darkroom(selectprToPaste, {
+        // Size options
+        minWidth: 100,
+        minHeight: 100,
+        maxWidth: 600,
+        maxHeight: 500,
+        ratio: 4/3,
+        backgroundColor: '#000',
+
+        // Plugins options
+        plugins: {
+          //save: false,
+          crop: {
+            quickCropKey: 67, //key "c"
+          }
+        },
+
+        // Post initialize script
+        initialize: function() {
+          var cropPlugin = this.plugins['crop'];
+          cropPlugin.requireFocus();
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
